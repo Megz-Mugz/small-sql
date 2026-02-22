@@ -9,18 +9,18 @@ void Parser::parse_query(std::string_view query) {
 
     switch (curr_lookahead){
 
-    case TokenType::SELECT_T:
-        parse_select_statement();
-        break;
-    // case TokenType::CREATE_T:
-    //     parse_create_statement();
-    //     break;
-    // case TokenType::UPDATE_T:
-    //     parse_update_statement();
-    //     break;
-    // case TokenType::DELETE_T:
-    //     parse_update_statement();
-    //     break;
+        case TokenType::SELECT_T:
+            parse_select_statement();
+            break;
+        case TokenType::CREATE_T:
+            parse_create_statement();
+            break;
+        case TokenType::UPDATE_T:
+            parse_update_statement();
+            break;
+        case TokenType::DELETE_T:
+            parse_delete_statement();
+            break;
     
     default:
         show_error();
@@ -61,6 +61,20 @@ TokenType Parser::get_next_token() {
 
 void Parser::show_error(std::optional<TokenType> expected_symbol) {
     if (expected_symbol) {
-        printf("Expected %s\n", token_to_string(*expected_symbol));
+        
+        std::cout << std::format("Expected %s, but saw %s instead", 
+                                token_to_string(*expected_symbol), 
+                                token_to_string(curr_lookahead));
     }
+}
+
+
+void Parser::parse_create_statement(){
+    // TODO
+}
+void Parser::parse_update_statement(){
+    // TODO
+}
+void Parser::parse_delete_statement(){
+    // TODO
 }
