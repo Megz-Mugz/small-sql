@@ -13,9 +13,13 @@ public:
 private:
     void match(const TokenType expected_symbol);
     void show_error(std::optional<TokenType> expected_symbol = std::nullopt);
+    TokenType get_next_token();
+    
     void parse_select_statement();
     void parse_create_statement();
     void parse_update_statement();
     void parse_delete_statement();
-    TokenType get_next_token();
+    
+    void parse_column_list();
+    void parse_where_clause();
 };

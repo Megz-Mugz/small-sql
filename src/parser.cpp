@@ -34,10 +34,10 @@ void Parser::parse_select_statement(){
     
     if (curr_lookahead == TokenType::SELECT_T){
         match(TokenType::SELECT_T);
-        // parse_column_list();
-        // match(TokenType::FROM_T);
-        // match(TokenType::IDENTIFIER_T);
-        // parse_where_clause();
+        parse_column_list();
+        match(TokenType::FROM_T);
+        match(TokenType::IDENTIFIER_T);
+        parse_where_clause();
         return;
     }
     
@@ -62,10 +62,15 @@ TokenType Parser::get_next_token() {
 void Parser::show_error(std::optional<TokenType> expected_symbol) {
     if (expected_symbol) {
         
-        std::cout << std::format("Expected %s, but saw %s instead", 
+        std::cout << std::format("Expected {}, but saw {} instead\n", 
                                 token_to_string(*expected_symbol), 
                                 token_to_string(curr_lookahead));
+                        
+    } else {
+        std::cout << "Unknown error occurred on word {}" << std::endl;
     }
+
+    exit(EXIT_FAILURE);
 }
 
 
@@ -76,5 +81,13 @@ void Parser::parse_update_statement(){
     // TODO
 }
 void Parser::parse_delete_statement(){
+    // TODO
+}
+
+void Parser::parse_column_list(){
+    // TODO
+}
+
+void Parser::parse_where_clause(){
     // TODO
 }
