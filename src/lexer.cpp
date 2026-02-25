@@ -55,34 +55,28 @@ std::optional<TokenType> Lexer::tokenize_operators(){
     switch (curr_char){
         case STAR:
             return TokenType::STAR_T;
-            break;
             
         case EQUALS:
             return TokenType::EQUALS_T;
-            break;
 
         case LESS_THAN:
             if (check_cursor_bounds() && _query[cursor+1] == EQUALS)
                 return TokenType::LESS_THAN_EQ_T;
             else
                 return TokenType::LESS_THAN_T;
-            break;
 
         case GREATER_THAN:
             if (check_cursor_bounds() && _query[cursor+1] == EQUALS)
                 return TokenType::GREATER_THAN_EQ_T;
             else
                 return TokenType::GREATER_THAN_T;
-            break;
             
         case EXCLAMATION:
             if (check_cursor_bounds() && _query[cursor+1] == EQUALS)
                 return TokenType::NOT_EQUAL;
-            break;
     
     default:
         return std::nullopt;
-        break;
     }
 
     // catch all case
