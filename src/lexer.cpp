@@ -94,15 +94,15 @@ std::optional<TokenType> Lexer::tokenize_operators(){
 }
 
 std::optional<TokenType> Lexer::tokenize_keywords_and_identifiers(){
-    // rules for identifier [a-z A-Z][a-Z A-Z 0-9]
-    // check if first char is valid
 
     std::size_t starting_pos{};
 
+    // check if first character is a-z or A-Z
     if ((std::isalpha(_query[cursor]))) {
         starting_pos = cursor++;
     }
 
+    // read until character is not alpha-numeric
     while (std::isalnum(_query[cursor])){
         cursor++;
     }
@@ -111,7 +111,6 @@ std::optional<TokenType> Lexer::tokenize_keywords_and_identifiers(){
     auto original_str = _query.substr(starting_pos, cursor - starting_pos);
     
     auto upper_str = uppercase_string(original_str);
-
     auto lookup = special_symbols.find(upper_str);
 
     if (lookup != special_symbols.end()){
